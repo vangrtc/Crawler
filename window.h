@@ -63,6 +63,10 @@ public:
 public slots:
     void on_webView_loadFinished();
 
+protected slots:
+    void adjustLocation();
+    void changeLocation();
+
 private:
     void examineChildElements(const QWebElement &parentElement,
                               QTreeWidgetItem *parentItem);

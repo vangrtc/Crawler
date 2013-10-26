@@ -48,8 +48,21 @@ Window::Window(QWidget *parent)
     : QMainWindow(parent)
 {
     setupUi(this);
+    connect(webView, SIGNAL(loadFinished(bool)), SLOT(adjustLocation()));
+    connect(addressLine, SIGNAL(returnPressed()), SLOT(changeLocation()));
 }
 //! [Window constructor]
+
+void Window::changeLocation()
+{
+    QUrl url = QUrl::fromUserInput(addressLine->text());
+    webView->load(url);
+    webView->setFocus();
+}
+void Window::adjustLocation()
+{
+    addressLine->setText(webView->url().toString());
+}
 
 //! [set URL]
 void Window::setUrl(const QUrl &url)
